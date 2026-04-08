@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0D0D0D">
+<title>Conecta Screen PRO</title>
+
+<style>
+/* ===== ESTILO GENERAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0D0D0D;
+  color: white;
+  overflow: hidden;
+}
+
+/* ===== PANTALLAS ===== */
+.screen {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+}
+
+.active {
+  display: flex;
+  animation: fade 0.8s ease;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* ===== TEXTOS ===== */
+h1 { font-size: 2.8em; }
+p { font-size: 1.4em; color: #ccc; }
+
+/* ===== LOGO ===== */
+.logo {
+  position: absolute;
+  bottom: 20px;
+  width: 120px;
+  opacity: 0.7;
+}
+
+/* ===== QR ===== */
+.qr {
+  width: 260px;
+  margin-top: 20px;
+  background: white;
+  padding: 12px;
+  border-radius: 20px;
+}
+
+/* ===== BOTÓN ===== */
+.btn {
+  margin-top: 15px;
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.btn-spotify {
+  background: #1DB954;
+  color: white;
+}
+
+/* ===== MENU TIPO NETFLIX ===== */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 90%;
+}
+
+.menu button {
+  padding: 25px;
+  font-size: 1.2em;
+  background: #1a1a1a;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+
+/* ===== TARJETAS ===== */
+.card {
+  background: #1a1a1a;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== PANTALLAS AUTOMÁTICAS ===== -->
+
+<div class="screen active">
+  <h1>Bienvenido a bordo</h1>
+  <p>Gracias por viajar conmigo</p>
+  <img src="logo-Conecta.png.png" class="logo">
+</div>
+
+<div class="screen">
+  <h1>Seguridad</h1>
+  <p>Utiliza el cinturón de seguridad</p>
+</div>
+
+<div class="screen">
+  <h1>Reglas</h1>
+  <p>No alimentos<br>No bebidas</p>
+</div>
+
+<div class="screen">
+  <h1>Reserva directo</h1>
+  <p>Evita comisiones</p>
+  <img src="qr.png" class="qr">
+</div>
+
+<div class="screen">
+  <h1>Beneficios</h1>
+  <p>🚗 Mismo conductor<br>💎 Mejor experiencia</p>
+</div>
+
+<!-- ===== PANTALLA INTERACTIVA ===== -->
+
+<div class="screen" id="menu">
+  <h1>Explora tu viaje</h1>
+
+  <div class="menu">
+    <button onclick="goSection('musica')">🎵 Música</button>
+    <button onclick="goSection('conecta')">🚗 Conecta</button>
+    <button onclick="goSection('promo')">🍔 Promos</button>
+    <button onclick="goSection('servicios')">💈 Servicios</button>
+  </div>
+</div>
+
+<!-- ===== SECCIONES ===== -->
+
+<div class="screen section" id="musica">
+  <h1>Música</h1>
+  <button class="btn btn-spotify" onclick="openSpotify()">Abrir Spotify</button>
+  <button class="btn" onclick="goHome()">Volver</button>
+</div>
+
+<div class="screen section" id="conecta">
+  <h1>Conecta Reservas</h1>
+  <p>Agenda tu próximo viaje</p>
+  <img src="qr.png" class="qr">
+  <button class="btn" onclick="goHome()">Volver</button>
+</div>
+
+<div class="screen section" id="promo">
+  <h1>Promociones</h1>
+
+  <div class="card">
+    <h2>Tacos El Jefe 🌮</h2>
+    <p>Promo especial</p>
+  </div>
+
+  <button class="btn" onclick="goHome()">Volver</button>
+</div>
+
+<div class="screen section" id="servicios">
+  <h1>Servicios</h1>
+
+  <div class="card">
+    <h2>Barbería 💈</h2>
+    <p>Corte + barba</p>
+  </div>
+
+  <button class="btn" onclick="goHome()">Volver</button>
+</div>
+
+<!-- ===== QR FINAL ===== -->
+
+<div class="screen">
+  <h1>¿Te gustó el servicio?</h1>
+  <p>Escanea y reserva tu próximo viaje</p>
+  <img src="qr.png" class="qr">
+  <img src="logo.png" class="logo">
+</div>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+
+let screens = document.querySelectorAll(".screen");
+let index = 0;
+let autoMode = true;
+
+/* ===== CARRUSEL ===== */
+function nextScreen() {
+  if (!autoMode) return;
+
+  screens[index].classList.remove("active");
+  index = (index + 1) % screens.length;
+  screens[index].classList.add("active");
+
+  setTimeout(nextScreen, 6000);
+}
+
+/* ===== ENTRAR A SECCIÓN ===== */
+function goSection(id) {
+  autoMode = false;
+
+  screens.forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  setTimeout(goHome, 15000); // regresa solo
+}
+
+/* ===== VOLVER ===== */
+function goHome() {
+  autoMode = true;
+
+  screens.forEach(s => s.classList.remove("active"));
+  index = 0;
+  screens[index].classList.add("active");
+
+  setTimeout(nextScreen, 6000);
+}
+
+/* ===== SPOTIFY ===== */
+function openSpotify() {
+  window.location.href = "spotify://";
+}
+
+/* ===== INICIO ===== */
+setTimeout(nextScreen, 6000);
+
+</script>
+
+</body>
+</html>
