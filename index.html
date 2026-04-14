@@ -44,8 +44,9 @@ p { font-size: 1.4em; color: #ccc; }
 
 /* ===== LOGO ===== */
 .logo {
-  width: 100px;
-  margin-top: 20px;
+  position: absolute;
+  bottom: 20px;
+  width: 120px;
   opacity: 0.7;
 }
 
@@ -123,7 +124,7 @@ p { font-size: 1.4em; color: #ccc; }
 <div class="screen">
   <h1>Reserva directo</h1>
   <p>Evita comisiones</p>
-  <img src="rI12M4.png" class="qr">
+  <img src="qr.png" class="qr">
 </div>
 
 <div class="screen">
@@ -148,14 +149,14 @@ p { font-size: 1.4em; color: #ccc; }
 
 <div class="screen section" id="musica">
   <h1>Música</h1>
-  <button class="btn btn-spotify" onclick="https://open.spotify.com/playlist/75Omhha4iVH200N2l2K9UQ?si=8Ri5AMBrQc2mCQ7ExMBOKw&pi=S7j0EkunSbCyW">Abrir Spotify</button>
+  <button class="btn btn-spotify" onclick="openSpotify()">Abrir Spotify</button>
   <button class="btn" onclick="goHome()">Volver</button>
 </div>
 
 <div class="screen section" id="conecta">
   <h1>Conecta Reservas</h1>
   <p>Agenda tu próximo viaje</p>
-  <img src="rI12M4.png" class="qr">
+  <img src="qr.png" class="qr">
   <button class="btn" onclick="goHome()">Volver</button>
 </div>
 
@@ -186,7 +187,7 @@ p { font-size: 1.4em; color: #ccc; }
 <div class="screen">
   <h1>¿Te gustó el servicio?</h1>
   <p>Escanea y reserva tu próximo viaje</p>
-  <img src="rI12M4.png" class="qr">
+  <img src="qr.png" class="qr">
   <img src="Logo-Conecta.png.png" class="logo">
 </div>
 
@@ -231,7 +232,7 @@ function goHome() {
 
 /* ===== SPOTIFY ===== */
 function openSpotify() {
-  window.open("https://open.spotify.com/playlist/75Omhha4iVH200N2l2K9UQ?si=8Ri5AMBrQc2mCQ7ExMBOKw&pi=S7j0EkunSbCyW", "_blank");
+  window.location.href = "spotify://";
 }
 
 /* ===== INICIO ===== */
