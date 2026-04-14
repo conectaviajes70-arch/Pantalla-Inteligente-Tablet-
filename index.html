@@ -3,242 +3,203 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0D0D0D">
 <title>Conecta Screen PRO</title>
 
 <style>
-/* ===== ESTILO GENERAL ===== */
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0D0D0D;
-  color: white;
-  overflow: hidden;
+:root{
+  --bg:#000;
+  --neon:#00eaff;
+  --text:#ffffff;
 }
 
-/* ===== PANTALLAS ===== */
-.screen {
-  display: none;
-  height: 100vh;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding: 20px;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial, sans-serif;
+  overflow:hidden;
 }
 
-.active {
-  display: flex;
-  animation: fade 0.8s ease;
+.screen{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
 }
 
-@keyframes fade {
-  from {opacity: 0;}
-  to {opacity: 1;}
+.active{
+  display:flex;
+  animation:fade 0.8s;
 }
 
-/* ===== TEXTOS ===== */
-h1 { font-size: 2.8em; }
-p { font-size: 1.4em; color: #ccc; }
-
-/* ===== LOGO ===== */
-.logo {
-  position: absolute;
-  bottom: 20px;
-  width: 120px;
-  opacity: 0.7;
+@keyframes fade{
+  from{opacity:0; transform:scale(1.05)}
+  to{opacity:1; transform:scale(1)}
 }
 
-/* ===== QR ===== */
-.qr {
-  width: 260px;
-  margin-top: 20px;
-  background: white;
-  padding: 12px;
-  border-radius: 20px;
+img{
+  max-width:200px;
+  margin:20px;
 }
 
-/* ===== BOTÓN ===== */
-.btn {
-  margin-top: 15px;
-  padding: 15px 25px;
-  border-radius: 30px;
-  border: none;
-  font-size: 1.1em;
-  cursor: pointer;
+h1,h2{
+  text-shadow:0 0 10px var(--neon);
 }
 
-.btn-spotify {
-  background: #1DB954;
-  color: white;
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
 }
 
-/* ===== MENU TIPO NETFLIX ===== */
-.menu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  width: 90%;
+.card{
+  border:1px solid var(--neon);
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 0 15px var(--neon);
+  cursor:pointer;
 }
 
-.menu button {
-  padding: 25px;
-  font-size: 1.2em;
-  background: #1a1a1a;
-  border: none;
-  border-radius: 20px;
-  color: white;
-}
-
-/* ===== TARJETAS ===== */
-.card {
-  background: #1a1a1a;
-  padding: 20px;
-  border-radius: 20px;
-  margin: 10px;
+.back{
+  position:absolute;
+  top:20px;
+  left:20px;
+  padding:10px 15px;
+  border:1px solid var(--neon);
+  cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== PANTALLAS AUTOMÁTICAS ===== -->
-
-<div class="screen active">
+<!-- PANTALLAS -->
+<div id="s1" class="screen active">
+  <img src="logo.png">
   <h1>Bienvenido a bordo</h1>
-  <p>Gracias por viajar conmigo</p>
-  <img src="logo.png" class="logo">
+  <h2>Gracias por viajar con Conecta</h2>
 </div>
 
-<div class="screen">
+<div id="s2" class="screen">
+  <img src="usa-cinturon.png">
   <h1>Seguridad</h1>
-  <p>Utiliza el cinturón de seguridad</p>
+  <h2>Utiliza el cinturón</h2>
 </div>
 
-<div class="screen">
+<div id="s3" class="screen">
+  <img src="no-food.png">
   <h1>Reglas</h1>
-  <p>No alimentos<br>No bebidas</p>
+  <h2>Sin alimentos ni bebidas</h2>
 </div>
 
-<div class="screen">
+<div id="s4" class="screen">
+  <img src="codigo-qr.png">
   <h1>Reserva directo</h1>
-  <p>Evita comisiones</p>
-  <img src="qr.png" class="qr">
+  <h2>Evita cancelaciones</h2>
 </div>
 
-<div class="screen">
+<div id="s5" class="screen">
   <h1>Beneficios</h1>
-  <p>🚗 Mismo conductor<br>💎 Mejor experiencia</p>
+  <h2>✔ Conductores verificados</h2>
+  <h2>✔ Puntualidad</h2>
+  <h2>✔ Mejor experiencia</h2>
 </div>
 
-<!-- ===== PANTALLA INTERACTIVA ===== -->
-
-<div class="screen" id="menu">
-  <h1>Explora tu viaje</h1>
-
-  <div class="menu">
-    <button onclick="goSection('musica')">🎵 Música</button>
-    <button onclick="goSection('conecta')">🚗 Conecta</button>
-    <button onclick="goSection('promo')">🍔 Promos</button>
-    <button onclick="goSection('servicios')">💈 Servicios</button>
+<div id="menu" class="screen">
+  <h1>Explora</h1>
+  <div class="buttons">
+    <div class="card" onclick="goLink('https://tu-app.com')">Conecta</div>
+    <div class="card" onclick="goLink('https://spotify.com')">Música</div>
+    <div class="card" onclick="openScreen('promos')">Promos</div>
+    <div class="card" onclick="openScreen('servicios')">Servicios</div>
   </div>
 </div>
 
-<!-- ===== SECCIONES ===== -->
-
-<div class="screen section" id="musica">
-  <h1>Música</h1>
-  <button class="btn btn-spotify" onclick="openSpotify()">Abrir Spotify</button>
-  <button class="btn" onclick="goHome()">Volver</button>
+<div id="promos" class="screen">
+  <div class="back" onclick="openScreen('menu')">← Regresar</div>
+  <div class="card" onclick="goLink('#')">Promo 1</div>
+  <div class="card" onclick="goLink('#')">Promo 2</div>
 </div>
 
-<div class="screen section" id="conecta">
-  <h1>Conecta Reservas</h1>
-  <p>Agenda tu próximo viaje</p>
-  <img src="qr.png" class="qr">
-  <button class="btn" onclick="goHome()">Volver</button>
+<div id="servicios" class="screen">
+  <div class="back" onclick="openScreen('menu')">← Regresar</div>
+  <div class="card" onclick="goLink('#')">Servicio 1</div>
+  <div class="card" onclick="goLink('#')">Servicio 2</div>
+  <div class="card" onclick="goLink('#')">Servicio 3</div>
 </div>
 
-<div class="screen section" id="promo">
-  <h1>Promociones</h1>
-
-  <div class="card">
-    <h2>Tacos El Jefe 🌮</h2>
-    <p>Promo especial</p>
-  </div>
-
-  <button class="btn" onclick="goHome()">Volver</button>
-</div>
-
-<div class="screen section" id="servicios">
-  <h1>Servicios</h1>
-
-  <div class="card">
-    <h2>Barbería 💈</h2>
-    <p>Corte + barba</p>
-  </div>
-
-  <button class="btn" onclick="goHome()">Volver</button>
-</div>
-
-<!-- ===== QR FINAL ===== -->
-
-<div class="screen">
+<div id="s7" class="screen">
+  <img src="codigo-qr.png">
   <h1>¿Te gustó el servicio?</h1>
-  <p>Escanea y reserva tu próximo viaje</p>
-  <img src="qr.png" class="qr">
-  <img src="logo.png" class="logo">
+  <h2>Reserva tu próximo viaje</h2>
 </div>
 
-<!-- ===== JAVASCRIPT ===== -->
+<div id="s8" class="screen">
+  <img src="logo.png">
+</div>
+
 <script>
+const flow = [
+  {id:'s1', time:5000},
+  {id:'s2', time:5000},
+  {id:'s3', time:5000},
+  {id:'s4', time:7000},
+  {id:'s5', time:5000},
+  {id:'menu', time:8000},
+  {id:'s7', time:5000},
+  {id:'s8', time:4000}
+];
 
-let screens = document.querySelectorAll(".screen");
-let index = 0;
-let autoMode = true;
+let index=0;
+let timer;
+let isInteracting=false;
 
-/* ===== CARRUSEL ===== */
-function nextScreen() {
-  if (!autoMode) return;
-
-  screens[index].classList.remove("active");
-  index = (index + 1) % screens.length;
-  screens[index].classList.add("active");
-
-  setTimeout(nextScreen, 6000);
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
-/* ===== ENTRAR A SECCIÓN ===== */
-function goSection(id) {
-  autoMode = false;
-
-  screens.forEach(s => s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-
-  setTimeout(goHome, 15000); // regresa solo
+function next(){
+  if(isInteracting) return;
+  index = (index+1)%flow.length;
+  showScreen(flow[index].id);
+  timer = setTimeout(next, flow[index].time);
 }
 
-/* ===== VOLVER ===== */
-function goHome() {
-  autoMode = true;
-
-  screens.forEach(s => s.classList.remove("active"));
-  index = 0;
-  screens[index].classList.add("active");
-
-  setTimeout(nextScreen, 6000);
+function start(){
+  showScreen(flow[0].id);
+  timer = setTimeout(next, flow[0].time);
 }
 
-/* ===== SPOTIFY ===== */
-function openSpotify() {
-  window.location.href = "spotify://";
+function openScreen(id){
+  isInteracting=true;
+  clearTimeout(timer);
+  showScreen(id);
 }
 
-/* ===== INICIO ===== */
-setTimeout(nextScreen, 6000);
+function goLink(url){
+  window.open(url,'_blank');
+}
 
+let inactivity;
+document.addEventListener('click', ()=>{
+  isInteracting=true;
+  clearTimeout(timer);
+  clearTimeout(inactivity);
+  inactivity = setTimeout(()=>{
+    isInteracting=false;
+    index=0;
+    start();
+  },10000);
+});
+
+start();
 </script>
 
 </body>
 </html>
+
