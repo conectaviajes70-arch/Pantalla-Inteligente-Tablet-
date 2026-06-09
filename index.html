@@ -34,14 +34,11 @@
         }
         .slide.active { display: flex; }
         
-        .logo {
-            width: 180px;
-            margin-bottom: 20px;
-        }
+        .logo { width: 180px; margin-bottom: 20px; }
         h1 { font-size: 2.2em; margin-bottom: 15px; color: #00e5ff; }
         h2 { font-size: 1.6em; margin: 15px 0; }
-        
-        /* Barra superior */
+
+        /* Barra superior - Solo en pantallas 2 a 6 */
         .top-bar {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -77,6 +74,7 @@
             transition: width linear;
         }
 
+        /* Modales */
         .modal {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -91,6 +89,8 @@
             padding: 20px;
             border-radius: 15px;
             max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
             text-align: center;
         }
     </style>
@@ -98,7 +98,6 @@
 <body>
 
     <div id="carousel">
-        
         <!-- Pantalla 1 -->
         <div class="slide active" id="slide1">
             <img src="Logo-Conecta.png.png" class="logo" alt="Conecta Logo">
@@ -121,7 +120,12 @@
 
         <!-- Pantalla 3 -->
         <div class="slide" id="slide3">
-            <div class="top-bar active"> <!-- mismos botones --> </div>
+            <div class="top-bar active">
+                <button class="top-btn" onclick="openLink('https://conecta.com/que-es')">¿Qué es Conecta?</button>
+                <button class="top-btn" onclick="openSpotify()">🎵 Música</button>
+                <button class="top-btn" onclick="showPromos()">Promos</button>
+                <button class="top-btn" onclick="showServicios()">Servicios</button>
+            </div>
             <img src="no-food.png" style="width:70%; max-height:45%; margin-bottom:20px;" alt="No comida">
             <h2>Reglas del Viaje</h2>
             <h1>Sin alimentos • Sin bebidas • No fumar</h1>
@@ -129,7 +133,12 @@
 
         <!-- Pantalla 4 -->
         <div class="slide" id="slide4">
-            <div class="top-bar active"> <!-- mismos botones --> </div>
+            <div class="top-bar active">
+                <button class="top-btn" onclick="openLink('https://conecta.com/que-es')">¿Qué es Conecta?</button>
+                <button class="top-btn" onclick="openSpotify()">🎵 Música</button>
+                <button class="top-btn" onclick="showPromos()">Promos</button>
+                <button class="top-btn" onclick="showServicios()">Servicios</button>
+            </div>
             <h2>Reserva Directo</h2>
             <h1>Evita cancelaciones</h1>
             <img src="qr-reservas.png" style="width:65%; margin:25px 0;" alt="QR">
@@ -138,9 +147,14 @@
 
         <!-- Pantalla 5 -->
         <div class="slide" id="slide5">
-            <div class="top-bar active"> <!-- mismos botones --> </div>
+            <div class="top-bar active">
+                <button class="top-btn" onclick="openLink('https://conecta.com/que-es')">¿Qué es Conecta?</button>
+                <button class="top-btn" onclick="openSpotify()">🎵 Música</button>
+                <button class="top-btn" onclick="showPromos()">Promos</button>
+                <button class="top-btn" onclick="showServicios()">Servicios</button>
+            </div>
             <h2>Beneficios Conecta</h2>
-            <ul style="text-align:left; font-size:1.3em; line-height:1.8;">
+            <ul style="text-align:left; font-size:1.3em; line-height:1.8; margin-top:20px;">
                 <li>🔹 Conductores verificados</li>
                 <li>🔹 Alta puntualidad</li>
                 <li>🔹 Mejor experiencia</li>
@@ -149,7 +163,12 @@
 
         <!-- Pantalla 6 -->
         <div class="slide" id="slide6">
-            <div class="top-bar active"> <!-- mismos botones --> </div>
+            <div class="top-bar active">
+                <button class="top-btn" onclick="openLink('https://conecta.com/que-es')">¿Qué es Conecta?</button>
+                <button class="top-btn" onclick="openSpotify()">🎵 Música</button>
+                <button class="top-btn" onclick="showPromos()">Promos</button>
+                <button class="top-btn" onclick="showServicios()">Servicios</button>
+            </div>
             <h2>¿Te gustó el servicio?</h2>
             <h1>¡Reserva tu próximo viaje!</h1>
             <img src="qr-reservas.png" style="width:65%; margin:25px 0;" alt="QR">
@@ -171,14 +190,27 @@
     <div id="modalPromos" class="modal">
         <div class="modal-content">
             <h2>Promociones</h2>
-            <p>Toca una imagen para ver la promo</p>
-            <!-- Agrega aquí tus imágenes con enlaces -->
-            <div style="display:flex; gap:10px; margin:20px 0; justify-content:center;">
+            <div style="display:flex; gap:10px; margin:20px 0; justify-content:center; flex-wrap:wrap;">
                 <img src="magica-dulzura.png.png" style="width:30%; border-radius:10px;" onclick="openLink('https://conectaviajes70-arch.github.io/Magica-Dulzura-D-LISS/')">
                 <img src="promo2.png" style="width:30%; border-radius:10px;" onclick="openLink('https://tu-promo2.com')">
                 <img src="promo3.png" style="width:30%; border-radius:10px;" onclick="openLink('https://tu-promo3.com')">
             </div>
-            <button onclick="closeModals()" style="margin-top:15px;">Cerrar</button>
+            <button onclick="closeModals()" style="margin-top:15px; padding:12px 30px;">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal Servicios -->
+    <div id="modalServicios" class="modal">
+        <div class="modal-content">
+            <h2>Nuestros Servicios</h2>
+            <div style="display:flex; gap:10px; margin:20px 0; justify-content:center; flex-wrap:wrap;">
+                <img src="Mexaclean.jpg" style="width:30%; border-radius:10px;" onclick="openLink('https://www.instagram.com/mexacleanmex/?hl=es')">
+                <img src="servicio2.png" style="width:30%; border-radius:10px;" onclick="openLink('https://enlace-servicio2.com')">
+                <img src="servicio3.png" style="width:30%; border-radius:10px;" onclick="openLink('https://enlace-servicio3.com')">
+                <img src="servicio4.png" style="width:30%; border-radius:10px;" onclick="openLink('https://enlace-servicio4.com')">
+                <img src="servicio5.png" style="width:30%; border-radius:10px;" onclick="openLink('https://enlace-servicio5.com')">
+            </div>
+            <button onclick="closeModals()" style="margin-top:15px; padding:12px 30px;">Cerrar</button>
         </div>
     </div>
 
@@ -188,12 +220,17 @@
         let currentSlide = 0;
         let timer;
 
-        const durations = [9000, 5000, 5000, 7000, 5000, 8000, 6000]; // en milisegundos
+        const durations = [9000, 5000, 5000, 7000, 5000, 8000, 6000];
 
         function showSlide(index) {
             slides.forEach(s => s.classList.remove('active'));
             slides[index].classList.add('active');
             currentSlide = index;
+
+            // Mostrar barra superior solo en pantallas 2 a 6
+            const topBar = document.querySelectorAll('.top-bar');
+            topBar.forEach(bar => bar.classList.toggle('active', index >= 1 && index <= 5));
+
             startProgress();
         }
 
@@ -214,14 +251,13 @@
             timer = setInterval(nextSlide, durations[0]);
         }
 
-        // Control manual (tocar la pantalla)
+        // Click para avanzar manualmente
         document.getElementById('carousel').addEventListener('click', () => {
             clearInterval(timer);
             nextSlide();
             timer = setInterval(nextSlide, durations[currentSlide]);
         });
 
-        // Funciones de botones
         function openLink(url) {
             window.open(url, '_blank');
         }
@@ -235,15 +271,13 @@
         }
 
         function showServicios() {
-            alert("📌 Servicios disponibles:\n\n• Viajes Ejecutivos\n• Aeropuerto\n• Mudanzas\n• Viajes Intermunicipales\n• Reservas para eventos");
-            // Puedes convertir esto en modal más adelante
+            document.getElementById('modalServicios').style.display = 'flex';
         }
 
         function closeModals() {
             document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
         }
 
-        // Iniciar
         window.onload = startCarousel;
     </script>
 </body>
