@@ -278,6 +278,26 @@
             document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
         }
 
+        const API_URL =
+'https://script.google.com/macros/s/AKfycbx3qTfSM1l3qgogSyCrY6QPDEdvdkCGTqQM0FgA_SHGhl1fQ-AXioUL5EWtd4KBKEw0zQ/exec';
+
+function registrarEvento(
+    evento,
+    nombre,
+    url = ''
+) {
+
+    fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+            evento,
+            nombre,
+            url
+        })
+    })
+    .catch(err => console.log(err));
+}
+
         window.onload = startCarousel;
     </script>
 </body>
